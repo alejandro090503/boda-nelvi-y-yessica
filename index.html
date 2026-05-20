@@ -415,23 +415,33 @@ body{
   margin-top:10px;
   text-transform:uppercase;
 }
+.loc-map-embed{
+  width:100%;
+  height:200px;
+  border-radius:14px;
+  border:none;
+  margin-top:20px;
+  display:block;
+  filter:saturate(.85) brightness(.97);
+}
 .btn-map{
   display:inline-flex;align-items:center;gap:8px;
-  margin-top:24px;
-  background:var(--dark);
-  color:#fff;
+  margin-top:14px;
+  background:transparent;
+  color:var(--dark);
   text-decoration:none;
   font-family:'Lato',sans-serif;
-  font-weight:400;
-  font-size:13px;
+  font-weight:500;
+  font-size:12px;
   letter-spacing:2px;
   text-transform:uppercase;
-  padding:13px 28px;
+  padding:10px 22px;
   border-radius:40px;
-  transition:background .3s;
+  border:1.5px solid var(--dark);
+  transition:all .3s;
 }
-.btn-map:hover{background:var(--accent)}
-.btn-map svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+.btn-map:hover{background:var(--dark);color:#fff}
+.btn-map svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
 .loc-cal-divider{
   width:40px;height:1px;
   background:linear-gradient(to right,transparent,var(--accent),transparent);
@@ -1054,11 +1064,18 @@ body{
       <div class="loc-name">Ceremonia</div>
       <div class="loc-sub">Ceremonia Religiosa</div>
       <div class="loc-hours">4:00 pm</div>
-      <div class="loc-city">Morelia, Michoacán</div>
+      <div class="loc-city">Parroquia de San José · Morelia, Michoacán</div>
+      <iframe
+        class="loc-map-embed"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Parroquia+de+San+Jose,+Belisario+Dominguez+250,+Centro+historico,+Morelia,+Michoacan&output=embed&z=16">
+      </iframe>
       <a href="https://maps.app.goo.gl/Prv5jAjynFweQPLS9"
          target="_blank" rel="noopener" class="btn-map">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        Ver en Google Maps
+        Abrir en Google Maps
       </a>
     </div>
 
@@ -1067,11 +1084,18 @@ body{
       <div class="loc-name">Recepción</div>
       <div class="loc-sub">Vía Romería</div>
       <div class="loc-hours">7:00 pm</div>
-      <div class="loc-city">Morelia, Michoacán</div>
+      <div class="loc-city">Vía Romería · Morelia, Michoacán</div>
+      <iframe
+        class="loc-map-embed"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Via+Romeria,+Morelia,+Michoacan,+Mexico&output=embed&z=16">
+      </iframe>
       <a href="https://share.google/hjtfcouOy1XNHceC5"
          target="_blank" rel="noopener" class="btn-map">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        Ver en Google Maps
+        Abrir en Google Maps
       </a>
     </div>
 
