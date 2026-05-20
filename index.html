@@ -1390,6 +1390,13 @@ function initEnvelope(){
 
     gsap.to(envTap, { opacity: 0, duration: .3 });
 
+    /* Arrancar audio aquí, dentro del gesto del usuario, para que el navegador lo permita */
+    const audio = document.getElementById('bgAudio');
+    const fab   = document.getElementById('musicFab');
+    if (audio && audio.paused){
+      audio.play().then(() => { if(fab) fab.classList.add('playing'); }).catch(() => {});
+    }
+
     envVideo.currentTime = 0;
     envVideo.play().catch(() => {});
 
