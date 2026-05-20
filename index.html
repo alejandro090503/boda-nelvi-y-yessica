@@ -611,62 +611,51 @@ body{
   line-height:1.3;
 }
 
-/* ── GALERÍA CARRUSEL ── */
-#galeria{padding:72px 28px;background:var(--bg);text-align:center}
-.gal-wrap{position:relative;margin-top:32px}
-.gal-carousel{
-  position:relative;overflow:hidden;
-  border-radius:28px;
-  aspect-ratio:4/5;
-  box-shadow:0 16px 56px rgba(106,107,75,.18);
-  cursor:grab;
-  user-select:none;
+/* ── GALERÍA RUEDA 3D ── */
+#galeria{padding:72px 28px 80px;background:var(--bg);text-align:center;overflow:visible}
+.wheel-scene{
+  position:relative;
+  width:100%;
+  height:520px;
+  margin:40px auto 0;
+  perspective:900px;
+  transform-style:preserve-3d;
+  overflow:visible;
 }
-.gal-carousel:active{cursor:grabbing}
-.gal-slide{
-  position:absolute;inset:0;
-  opacity:0;
-  transition:opacity .85s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
-}
-.gal-slide.active{opacity:1;pointer-events:auto}
-.gal-slide img{
+.wheel-ring{
+  position:absolute;
   width:100%;height:100%;
-  object-fit:cover;object-position:center top;
+  transform-style:preserve-3d;
+  cursor:grab;
+}
+.wheel-ring.dragging{cursor:grabbing}
+.wheel-card{
+  position:absolute;
+  width:160px;height:220px;
+  left:50%;top:50%;
+  margin-left:-80px;margin-top:-110px;
+  border-radius:18px;
+  overflow:hidden;
+  border:2px solid rgba(106,107,75,.25);
+  box-shadow:0 12px 40px rgba(106,107,75,.20);
+  user-select:none;
+  -webkit-user-select:none;
+}
+.wheel-card img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
   display:block;
   pointer-events:none;
 }
-.gal-vignette{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(30,21,8,.28) 0%,transparent 55%);
-  pointer-events:none;
+.gal-hint{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:13px;
+  letter-spacing:3px;
+  color:var(--accent);
+  margin-top:24px;
+  opacity:.7;
 }
-.gal-btn{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:42px;height:42px;border-radius:50%;
-  background:rgba(255,255,255,.72);
-  border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(6px);
-  z-index:10;
-  transition:background .2s,transform .2s;
-  -webkit-backdrop-filter:blur(6px);
-}
-.gal-btn:hover{background:rgba(255,255,255,.95);transform:translateY(-50%) scale(1.08)}
-.gal-btn svg{width:18px;height:18px;stroke:var(--dark);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.gal-prev{left:14px}
-.gal-next{right:14px}
-.gal-dots{
-  display:flex;justify-content:center;align-items:center;
-  gap:8px;margin-top:20px;
-}
-.gal-dot{
-  width:7px;height:7px;border-radius:4px;
-  background:var(--accent);opacity:.28;
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-  cursor:pointer;border:none;padding:0;
-}
-.gal-dot.active{opacity:1;width:22px}
 
 /* ── RSVP ── */
 #rsvp{padding:72px 28px;background:linear-gradient(to bottom,var(--bg) 0%,var(--surface) 14%,var(--surface) 86%,var(--bg) 100%);text-align:center}
@@ -1250,47 +1239,20 @@ body{
     </div>
   </section>
 
-  <!-- ── 13. GALERÍA CARRUSEL ── -->
+  <!-- ── 13. GALERÍA RUEDA 3D ── -->
   <section id="galeria">
     <p class="eyebrow rv">Nosotros</p>
     <h2 class="script-title rv">Nuestra Historia</h2>
-    <div class="gal-wrap rv">
-      <div class="gal-carousel" id="galCarousel">
-        <div class="gal-slide active">
-          <img src="foto1.jpg" alt="Yessica &amp; Nelvi">
-          <div class="gal-vignette"></div>
-        </div>
-        <div class="gal-slide">
-          <img src="foto2.jpg" alt="Yessica &amp; Nelvi">
-          <div class="gal-vignette"></div>
-        </div>
-        <div class="gal-slide">
-          <img src="foto3.jpg" alt="Yessica &amp; Nelvi">
-          <div class="gal-vignette"></div>
-        </div>
-        <div class="gal-slide">
-          <img src="foto4.jpg" alt="Yessica &amp; Nelvi">
-          <div class="gal-vignette"></div>
-        </div>
-        <div class="gal-slide">
-          <img src="foto5.jpg" alt="Yessica &amp; Nelvi">
-          <div class="gal-vignette"></div>
-        </div>
-        <button class="gal-btn gal-prev" aria-label="Anterior">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="gal-btn gal-next" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-      <div class="gal-dots">
-        <button class="gal-dot active" aria-label="Foto 1"></button>
-        <button class="gal-dot" aria-label="Foto 2"></button>
-        <button class="gal-dot" aria-label="Foto 3"></button>
-        <button class="gal-dot" aria-label="Foto 4"></button>
-        <button class="gal-dot" aria-label="Foto 5"></button>
+    <div class="wheel-scene rv" id="wheel-scene">
+      <div class="wheel-ring" id="wheel-ring">
+        <div class="wheel-card"><img src="foto1.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto2.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto3.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto4.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto5.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
       </div>
     </div>
+    <p class="gal-hint rv">Arrastra para girar</p>
   </section>
 
   <!-- ── ORNAMENTO B ── -->
@@ -1672,40 +1634,75 @@ function initAll(){
   });
 
   /* Carrusel de fotos */
-  (function initCarousel(){
-    const slides  = document.querySelectorAll('.gal-slide');
-    const dots    = document.querySelectorAll('.gal-dot');
-    const prevBtn = document.querySelector('.gal-prev');
-    const nextBtn = document.querySelector('.gal-next');
-    let   current = 0;
-    let   timer;
+  /* Galería — rueda 3D con inercia */
+  (function initWheel(){
+    var cards  = document.querySelectorAll('.wheel-card');
+    var ring   = document.getElementById('wheel-ring');
+    if (!ring || cards.length === 0) return;
 
-    function goTo(n){
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = ((n % slides.length) + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
+    var n       = cards.length;
+    var radius  = 240;
+    var rot     = 0;
+    var vel     = 0;
+    var isDrag  = false;
+    var startX  = 0;
+    var startRot = 0;
+    var lastX   = 0;
+    var rafId   = null;
+
+    cards.forEach(function(card, i){
+      card.style.transform = 'rotateY(' + (360 / n * i) + 'deg) translateZ(' + radius + 'px)';
+    });
+
+    function setRot(r){
+      rot = r;
+      gsap.set(ring, { rotateY: rot });
     }
 
-    function resetTimer(){
-      clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 4000);
+    function inertia(){
+      if (Math.abs(vel) < 0.05){ vel = 0; return; }
+      vel *= 0.94;
+      setRot(rot + vel);
+      rafId = requestAnimationFrame(inertia);
     }
 
-    let startX = 0;
-    const carousel = document.getElementById('galCarousel');
-    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend',   e => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40){ goTo(current + (dx < 0 ? 1 : -1)); resetTimer(); }
+    ring.addEventListener('mousedown', function(e){
+      cancelAnimationFrame(rafId);
+      isDrag = true; vel = 0;
+      startX = e.clientX; startRot = rot; lastX = e.clientX;
+      ring.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', function(e){
+      if (!isDrag) return;
+      var dx = e.clientX - startX;
+      vel = (e.clientX - lastX) * 0.5;
+      lastX = e.clientX;
+      setRot(startRot + dx * 0.45);
+    });
+    window.addEventListener('mouseup', function(){
+      if (!isDrag) return;
+      isDrag = false;
+      ring.classList.remove('dragging');
+      rafId = requestAnimationFrame(inertia);
+    });
+
+    ring.addEventListener('touchstart', function(e){
+      cancelAnimationFrame(rafId);
+      isDrag = true; vel = 0;
+      startX = e.touches[0].clientX; startRot = rot; lastX = startX;
     }, { passive: true });
-
-    prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
-    nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
-    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetTimer(); }));
-
-    resetTimer();
+    window.addEventListener('touchmove', function(e){
+      if (!isDrag) return;
+      var dx = e.touches[0].clientX - startX;
+      vel = (e.touches[0].clientX - lastX) * 0.5;
+      lastX = e.touches[0].clientX;
+      setRot(startRot + dx * 0.45);
+    }, { passive: true });
+    window.addEventListener('touchend', function(){
+      if (!isDrag) return;
+      isDrag = false;
+      rafId = requestAnimationFrame(inertia);
+    });
   })();
 
   /* Ocultar scroll hint */
