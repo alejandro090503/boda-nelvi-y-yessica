@@ -1106,6 +1106,7 @@ body{
         <span class="fecha-rule fecha-rule--r"></span>
       </div>
       <div class="fecha-vline"></div>
+      <p id="invPersonalizada" class="rv" style="display:none;margin-top:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--accent);text-align:center;letter-spacing:.3px;line-height:1.6"></p>
     </div>
   </section>
 
@@ -1757,10 +1758,7 @@ body{
       </div>
       <div id="rsvpNamesContainer"></div>
       <button class="btn-wa" id="btnConfirmar" onclick="sendRsvp()">
-        Confirmar asistencia
-      </button>
-      <button type="button" id="btnDeclinar" onclick="sendDecline()" style="display:block;width:100%;margin-top:12px;padding:13px;background:transparent;color:var(--text);border:1px solid rgba(0,0,0,.15);border-radius:30px;font-family:inherit;font-size:14px;cursor:pointer;transition:all .25s">
-        No podré asistir
+        Confirmar
       </button>
       <p id="rsvpFeedback" style="display:none;text-align:center;margin-top:14px;font-size:14px;font-style:italic"></p>
     </div>
@@ -2021,10 +2019,11 @@ function launchSparkle(){
 
 /* ─────────────── RSVP PASES ─────────────── */
 const RSVP_PARAMS = new URLSearchParams(window.location.search);
-const RSVP_PARA   = RSVP_PARAMS.get('para') || 'Invitado';
+const RSVP_PARA   = RSVP_PARAMS.get('para');
 const RSVP_RAW    = parseInt(RSVP_PARAMS.get('pases') || '1', 10);
 const RSVP_PASES  = (isNaN(RSVP_RAW) || RSVP_RAW < 1 || RSVP_RAW > 20) ? 1 : RSVP_RAW;
 const RSVP_URL    = 'https://boda-nelvi-y-yessica.vercel.app';
+let   RSVP_CHOICE = '';   /* 'yes' | 'no' | '' */
 
 (function initRsvp(){
   const badge = document.getElementById('rsvpPasesBadge');
@@ -2043,7 +2042,35 @@ const RSVP_URL    = 'https://boda-nelvi-y-yessica.vercel.app';
       '<input type="text" id="rsvpName' + i + '" class="rsvp-name-input" placeholder="' + ph + '" autocomplete="name">';
     container.appendChild(div);
   }
+
+  /* Línea personalizada bajo la fecha (solo si hay ?para=) */
+  if(RSVP_PARA){
+    const inv = document.getElementById('invPersonalizada');
+    if(inv){
+      const safe = RSVP_PARA.replace(/</g,'&lt;');
+      const pl   = RSVP_PASES === 1 ? '1 pase' : RSVP_PASES + ' pases';
+      inv.innerHTML = 'Esta invitación es para<br><strong style="font-style:normal;color:var(--accent);font-weight:600">' + safe + '</strong><br>con ' + pl;
+      inv.style.display = 'block';
+    }
+  }
 })();
+
+/* ─────────────── TOGGLE SÍ / NO ASISTIRÉ ─────────────── */
+function selectAttend(choice){
+  RSVP_CHOICE = choice;
+  const btnYes = document.getElementById('btnSiAsistire');
+  const btnNo  = document.getElementById('btnNoAsistire');
+  if(btnYes) btnYes.classList.toggle('active', choice === 'yes');
+  if(btnNo)  btnNo.classList.toggle('active',  choice === 'no');
+
+  /* Ocultar inputs si dijo que NO asistirá */
+  const cont = document.getElementById('rsvpNamesContainer');
+  if(cont) cont.style.display = choice === 'no' ? 'none' : '';
+
+  /* Limpiar feedback previo */
+  const fb = document.getElementById('rsvpFeedback');
+  if(fb) fb.style.display = 'none';
+}
 
 /* ─────────────── RSVP → PANEL ─────────────── */
 function setFeedback(msg, color){
@@ -2055,10 +2082,10 @@ function setFeedback(msg, color){
 }
 
 function postRsvp(estado, nombresArr){
-  const btnC = document.getElementById('btnConfirmar');
-  const btnD = document.getElementById('btnDeclinar');
+  const btnC   = document.getElementById('btnConfirmar');
+  const btnYes = document.getElementById('btnSiAsistire');
+  const btnNo  = document.getElementById('btnNoAsistire');
   btnC.disabled = true;
-  btnD.disabled = true;
   btnC.textContent = 'Enviando…';
   setFeedback('', 'inherit');
 
@@ -2066,7 +2093,7 @@ function postRsvp(estado, nombresArr){
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      nombre:              RSVP_PARA,
+      nombre:              RSVP_PARA || 'Invitado',
       estado:              estado,
       pases_confirmados:   estado === 'confirmado' ? nombresArr.length : 0,
       nombres_confirmados: estado === 'confirmado' ? nombresArr : [],
@@ -2077,8 +2104,9 @@ function postRsvp(estado, nombresArr){
   .then(function(d){
     if(d && d.ok){
       btnC.textContent = estado === 'confirmado' ? '¡Confirmado! ✦' : 'Respuesta enviada ✦';
-      btnD.style.display = 'none';
       document.querySelectorAll('.rsvp-name-input').forEach(function(i){ i.disabled = true; });
+      if(btnYes) btnYes.disabled = true;
+      if(btnNo)  btnNo.disabled  = true;
       setFeedback(
         estado === 'confirmado'
           ? '¡Gracias por confirmar! Los novios han sido notificados.'
@@ -2086,19 +2114,28 @@ function postRsvp(estado, nombresArr){
         '#6b9b64'
       );
     } else {
-      btnC.disabled = false; btnD.disabled = false;
-      btnC.textContent = 'Confirmar asistencia';
+      btnC.disabled = false;
+      btnC.textContent = 'Confirmar';
       setFeedback('Hubo un problema al enviar. Intenta de nuevo.', '#b91c1c');
     }
   })
   .catch(function(){
-    btnC.disabled = false; btnD.disabled = false;
-    btnC.textContent = 'Confirmar asistencia';
+    btnC.disabled = false;
+    btnC.textContent = 'Confirmar';
     setFeedback('Sin conexión. Verifica tu internet e intenta de nuevo.', '#b91c1c');
   });
 }
 
 function sendRsvp(){
+  if(!RSVP_CHOICE){
+    setFeedback('Selecciona si asistirás o no.', '#b91c1c');
+    return;
+  }
+  if(RSVP_CHOICE === 'no'){
+    postRsvp('declino', []);
+    return;
+  }
+  /* RSVP_CHOICE === 'yes' */
   const inputs = document.querySelectorAll('.rsvp-name-input');
   const names  = Array.from(inputs).map(i => i.value.trim()).filter(n => n);
   if(names.length === 0){
@@ -2107,10 +2144,6 @@ function sendRsvp(){
     return;
   }
   postRsvp('confirmado', names);
-}
-
-function sendDecline(){
-  postRsvp('declino', [])
 }
 
 /* ─────────────── VINYL MUSIC BTN ─────────────── */
