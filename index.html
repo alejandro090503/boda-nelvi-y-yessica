@@ -367,6 +367,7 @@ body{
   color:var(--accent);
   margin-top:22px;
   display:block;
+  letter-spacing:6px;
 }
 
 /* ── FAMILIA ── */
@@ -658,9 +659,9 @@ body{
 .wheel-ring.dragging{cursor:grabbing}
 .wheel-card{
   position:absolute;
-  width:160px;height:220px;
+  width:200px;height:280px;
   left:50%;top:50%;
-  margin-left:-80px;margin-top:-110px;
+  margin-left:-100px;margin-top:-140px;
   border-radius:18px;
   overflow:hidden;
   border:2px solid rgba(106,107,75,.25);
@@ -674,6 +675,19 @@ body{
   display:block;
   pointer-events:none;
 }
+.wheel-card--video{position:relative;cursor:pointer}
+.vc-play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(20,18,14,.52);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  border:1.5px solid rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  transition:opacity .25s,transform .25s;
+}
+.vc-play-btn svg{width:20px;height:20px;fill:#fff;margin-left:3px}
+.wheel-card--video.playing .vc-play-btn{opacity:0;transform:translate(-50%,-50%) scale(.8)}
 .gal-hint{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;
@@ -769,6 +783,23 @@ body{
 }
 .btn-wa:hover{background:var(--accent);box-shadow:0 6px 24px rgba(138,139,101,.38)}
 .btn-wa svg{width:20px;height:20px;fill:currentColor;flex-shrink:0;opacity:.85}
+.rsvp-attend-row{display:flex;gap:12px;margin-top:6px;margin-bottom:18px}
+.rsvp-attend-btn{
+  flex:1;padding:13px 10px;
+  border:1.5px solid var(--dark);border-radius:50px;
+  background:transparent;color:var(--dark);
+  font-family:'Lato',sans-serif;font-weight:500;font-size:13px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  cursor:pointer;transition:background .25s,color .25s,box-shadow .25s;
+}
+.rsvp-attend-btn.active,.rsvp-attend-btn:hover{
+  background:var(--dark);color:#fff;
+  box-shadow:0 4px 14px rgba(106,107,75,.30);
+}
+.rsvp-attend-btn--no.active,.rsvp-attend-btn--no:hover{
+  background:#a05050;border-color:#a05050;
+  box-shadow:0 4px 14px rgba(160,80,80,.25);
+}
 
 /* ── SIN NIÑOS ── */
 .no-kids{
@@ -1005,57 +1036,62 @@ body{
   <!-- ── ORNAMENTO A ── -->
   <div class="ornament rv">
     <svg viewBox="0 0 360 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- roseta central -->
-      <circle cx="180" cy="40" r="8.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <ellipse cx="180" cy="32.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32"/>
-      <ellipse cx="186.1" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(60 186.1 36)"/>
-      <ellipse cx="186.1" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(120 186.1 44)"/>
-      <ellipse cx="180" cy="47.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32" transform="rotate(180 180 47.5)"/>
-      <ellipse cx="173.9" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-120 173.9 44)"/>
-      <ellipse cx="173.9" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-60 173.9 36)"/>
-      <circle cx="180" cy="40" r="2.5" fill="#6a6b4b" opacity=".55"/>
-      <!-- tallo y joya base -->
-      <line x1="180" y1="48" x2="180" y2="60" stroke="#6a6b4b" stroke-width="1.1" opacity=".5" stroke-linecap="round"/>
-      <circle cx="180" cy="60" r="3" fill="#6a6b4b" opacity=".5"/>
-      <circle cx="180" cy="60" r="5.5" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".26"/>
-      <circle cx="180" cy="60" r="8" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".14"/>
-      <!-- ramas principales -->
-      <path d="M180 40 C164 36 142 28 116 19 C92 12 74 8 56 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C196 36 218 28 244 19 C268 12 286 8 304 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C172 35 158 28 138 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C188 35 202 28 222 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <!-- hojas rama izq exterior -->
-      <path d="M152 33 Q148 27 146 23 Q152 23 155 28 Q154 32 152 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="152" y1="33" x2="149" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M127 23 Q123 17 121 13 Q127 13 130 18 Q129 22 127 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="127" y1="23" x2="124" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M100 14 Q97 9 95 6 Q100 6 103 10 Q102 13 100 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas rama der exterior -->
-      <path d="M208 33 Q212 27 214 23 Q208 23 205 28 Q206 32 208 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="208" y1="33" x2="211" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M233 23 Q237 17 239 13 Q233 13 230 18 Q231 22 233 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="233" y1="23" x2="236" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M260 14 Q263 9 265 6 Q260 6 257 10 Q258 13 260 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas ramas interiores -->
-      <path d="M160 34 Q157 29 155 26 Q161 25 162 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M143 25 Q140 20 138 17 Q144 17 145 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <path d="M200 34 Q203 29 205 26 Q199 25 198 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M217 25 Q220 20 222 17 Q216 17 215 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- flor punta izq -->
-      <circle cx="56" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="56" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="45" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="35" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- flor punta der -->
-      <circle cx="304" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="304" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="315" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="325" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- puntas ramas interiores -->
-      <circle cx="138" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="138" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="222" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="222" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
+      <!-- lozenge center -->
+      <path d="M180 23 L188 35 L180 47 L172 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".9" opacity=".52"/>
+      <path d="M180 27 L185 35 L180 43 L175 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".4" opacity=".24"/>
+      <circle cx="180" cy="35" r="1.9" fill="#6a6b4b" opacity=".50"/>
+      <!-- stem + jewel -->
+      <line x1="180" y1="47" x2="180" y2="57" stroke="#6a6b4b" stroke-width=".75" opacity=".38" stroke-linecap="round"/>
+      <circle cx="180" cy="59.5" r="2.4" fill="#6a6b4b" opacity=".44"/>
+      <circle cx="180" cy="59.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".6" opacity=".22"/>
+      <circle cx="180" cy="59.5" r="7.2" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".12"/>
+      <!-- left main branch -->
+      <path d="M172 35 C156 32 136 24 112 16 C90 9 69 6 47 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- left secondary branch -->
+      <path d="M172 35 C161 31 146 25 128 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- right main branch -->
+      <path d="M188 35 C204 32 224 24 248 16 C270 9 291 6 313 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- right secondary branch -->
+      <path d="M188 35 C199 31 214 25 232 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- left main leaves -->
+      <path d="M160 29 C157 24 159 20 162 22 C163 26 161 29 160 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M150 26 C147 30 145 34 149 33 C152 32 152 28 150 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M138 21 C135 16 137 12 140 14 C141 18 139 21 138 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M127 17 C124 21 122 25 126 24 C129 23 129 19 127 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M113 12 C110 7 112 3 115 5 C116 9 114 12 113 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M100 9 C97 13 95 17 99 16 C102 15 102 11 100 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M85 7 C83 3 85 0 88 1 C88 4 86 7 85 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M71 6 C69 9 67 13 71 12 C74 11 74 7 71 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- left secondary leaves -->
+      <path d="M152 27 C150 23 152 20 154 21 C155 24 153 27 152 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M139 21 C137 25 136 28 139 27 C142 26 142 22 139 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- right main leaves -->
+      <path d="M200 29 C203 24 201 20 198 22 C197 26 199 29 200 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M210 26 C213 30 215 34 211 33 C208 32 208 28 210 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M222 21 C225 16 223 12 220 14 C219 18 221 21 222 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M233 17 C236 21 238 25 234 24 C231 23 231 19 233 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M247 12 C250 7 248 3 245 5 C244 9 246 12 247 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M260 9 C263 13 265 17 261 16 C258 15 258 11 260 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M275 7 C277 3 275 0 272 1 C272 4 274 7 275 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M289 6 C291 9 293 13 289 12 C286 11 286 7 289 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- right secondary leaves -->
+      <path d="M208 27 C210 23 208 20 206 21 C205 24 207 27 208 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M221 21 C223 25 224 28 221 27 C218 26 218 22 221 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- left tip -->
+      <circle cx="47" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="47" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="35" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="25" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- right tip -->
+      <circle cx="313" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="313" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="325" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="335" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- secondary tips -->
+      <circle cx="128" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="128" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
+      <circle cx="232" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="232" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
     </svg>
   </div>
 
@@ -1088,38 +1124,37 @@ body{
   <!-- ── ORNAMENTO B ── -->
   <div class="ornament ornament--s2b rv">
     <svg viewBox="0 0 260 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- medallón central -->
-      <circle cx="130" cy="16" r="9.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <circle cx="130" cy="16" r="7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
-      <ellipse cx="130" cy="8.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30"/>
-      <ellipse cx="135.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(60 135.5 11.8)"/>
-      <ellipse cx="135.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(120 135.5 20.2)"/>
-      <ellipse cx="130" cy="23.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30" transform="rotate(180 130 23.5)"/>
-      <ellipse cx="124.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-120 124.5 20.2)"/>
-      <ellipse cx="124.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-60 124.5 11.8)"/>
-      <circle cx="130" cy="16" r="3" fill="#6a6b4b" opacity=".52"/>
-      <!-- vides -->
-      <path d="M120 16 Q104 12 88 16 Q72 20 56 16 Q40 12 24 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <path d="M140 16 Q156 20 172 16 Q188 12 204 16 Q220 20 236 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <!-- hojas vide izq -->
-      <path d="M104 13 Q101 8 99 5 Q105 6 106 11 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M88 16 Q87 21 85 24 Q91 23 91 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M72 19 Q69 14 67 11 Q73 12 74 17 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M56 16 Q55 21 53 24 Q59 23 59 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M40 13 Q37 8 35 5 Q41 6 42 11 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- hojas vide der -->
-      <path d="M156 19 Q159 14 161 11 Q155 12 154 17 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M172 16 Q173 21 175 24 Q169 23 169 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M188 13 Q191 8 193 5 Q187 6 186 11 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M204 16 Q205 21 207 24 Q201 23 201 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M220 19 Q223 14 225 11 Q219 12 218 17 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- joyas extremos -->
-      <circle cx="24" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="24" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="236" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="236" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="13" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
-      <circle cx="247" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
+      <!-- fine rules -->
+      <line x1="10" y1="15.5" x2="113" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="147" y1="15.5" x2="250" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="10" y1="17.5" x2="113" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <line x1="147" y1="17.5" x2="250" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <!-- 4-petal blossom -->
+      <path d="M130 7 C127 9 127 13 130 14 C133 13 133 9 130 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M130 18 C127 19.5 127 23.5 130 25 C133 23.5 133 19.5 130 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M122 16 C122 13.5 118.5 12.5 117 14.5 C118.5 17 122 17 122 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M138 16 C138 13.5 141.5 12.5 143 14.5 C141.5 17 138 17 138 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <circle cx="130" cy="16" r="2.1" fill="#6a6b4b" opacity=".48"/>
+      <circle cx="130" cy="16" r="5.8" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".22"/>
+      <!-- diamond accents -->
+      <path d="M97 15.5 L100 18 L97 20.5 L94 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M163 15.5 L166 18 L163 20.5 L160 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M72 15.5 L75 18 L72 20.5 L69 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <path d="M188 15.5 L191 18 L188 20.5 L185 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <!-- leaf pairs (stroke only) -->
+      <path d="M84 14 C82 11 84 9 86 10 C86 13 85 14 84 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M84 18 C82 21 84 23 86 22 C86 19 85 18 84 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M57 14 C55 11 57 9 59 10 C59 13 58 14 57 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M57 18 C55 21 57 23 59 22 C59 19 58 18 57 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M176 14 C178 11 176 9 174 10 C174 13 175 14 176 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M176 18 C178 21 176 23 174 22 C174 19 175 18 176 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M203 14 C205 11 203 9 201 10 C201 13 202 14 203 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M203 18 C205 21 203 23 201 22 C201 19 202 18 203 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <!-- end ornaments -->
+      <circle cx="10" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="10" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
+      <circle cx="250" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="250" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
     </svg>
   </div>
 
@@ -1134,57 +1169,62 @@ body{
   <!-- ── ORNAMENTO A ── -->
   <div class="ornament ornament--b2s rv">
     <svg viewBox="0 0 360 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- roseta central -->
-      <circle cx="180" cy="40" r="8.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <ellipse cx="180" cy="32.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32"/>
-      <ellipse cx="186.1" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(60 186.1 36)"/>
-      <ellipse cx="186.1" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(120 186.1 44)"/>
-      <ellipse cx="180" cy="47.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32" transform="rotate(180 180 47.5)"/>
-      <ellipse cx="173.9" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-120 173.9 44)"/>
-      <ellipse cx="173.9" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-60 173.9 36)"/>
-      <circle cx="180" cy="40" r="2.5" fill="#6a6b4b" opacity=".55"/>
-      <!-- tallo y joya base -->
-      <line x1="180" y1="48" x2="180" y2="60" stroke="#6a6b4b" stroke-width="1.1" opacity=".5" stroke-linecap="round"/>
-      <circle cx="180" cy="60" r="3" fill="#6a6b4b" opacity=".5"/>
-      <circle cx="180" cy="60" r="5.5" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".26"/>
-      <circle cx="180" cy="60" r="8" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".14"/>
-      <!-- ramas principales -->
-      <path d="M180 40 C164 36 142 28 116 19 C92 12 74 8 56 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C196 36 218 28 244 19 C268 12 286 8 304 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C172 35 158 28 138 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C188 35 202 28 222 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <!-- hojas rama izq exterior -->
-      <path d="M152 33 Q148 27 146 23 Q152 23 155 28 Q154 32 152 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="152" y1="33" x2="149" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M127 23 Q123 17 121 13 Q127 13 130 18 Q129 22 127 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="127" y1="23" x2="124" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M100 14 Q97 9 95 6 Q100 6 103 10 Q102 13 100 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas rama der exterior -->
-      <path d="M208 33 Q212 27 214 23 Q208 23 205 28 Q206 32 208 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="208" y1="33" x2="211" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M233 23 Q237 17 239 13 Q233 13 230 18 Q231 22 233 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="233" y1="23" x2="236" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M260 14 Q263 9 265 6 Q260 6 257 10 Q258 13 260 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas ramas interiores -->
-      <path d="M160 34 Q157 29 155 26 Q161 25 162 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M143 25 Q140 20 138 17 Q144 17 145 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <path d="M200 34 Q203 29 205 26 Q199 25 198 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M217 25 Q220 20 222 17 Q216 17 215 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- flor punta izq -->
-      <circle cx="56" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="56" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="45" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="35" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- flor punta der -->
-      <circle cx="304" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="304" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="315" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="325" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- puntas ramas interiores -->
-      <circle cx="138" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="138" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="222" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="222" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
+      <!-- lozenge center -->
+      <path d="M180 23 L188 35 L180 47 L172 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".9" opacity=".52"/>
+      <path d="M180 27 L185 35 L180 43 L175 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".4" opacity=".24"/>
+      <circle cx="180" cy="35" r="1.9" fill="#6a6b4b" opacity=".50"/>
+      <!-- stem + jewel -->
+      <line x1="180" y1="47" x2="180" y2="57" stroke="#6a6b4b" stroke-width=".75" opacity=".38" stroke-linecap="round"/>
+      <circle cx="180" cy="59.5" r="2.4" fill="#6a6b4b" opacity=".44"/>
+      <circle cx="180" cy="59.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".6" opacity=".22"/>
+      <circle cx="180" cy="59.5" r="7.2" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".12"/>
+      <!-- left main branch -->
+      <path d="M172 35 C156 32 136 24 112 16 C90 9 69 6 47 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- left secondary branch -->
+      <path d="M172 35 C161 31 146 25 128 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- right main branch -->
+      <path d="M188 35 C204 32 224 24 248 16 C270 9 291 6 313 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- right secondary branch -->
+      <path d="M188 35 C199 31 214 25 232 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- left main leaves -->
+      <path d="M160 29 C157 24 159 20 162 22 C163 26 161 29 160 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M150 26 C147 30 145 34 149 33 C152 32 152 28 150 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M138 21 C135 16 137 12 140 14 C141 18 139 21 138 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M127 17 C124 21 122 25 126 24 C129 23 129 19 127 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M113 12 C110 7 112 3 115 5 C116 9 114 12 113 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M100 9 C97 13 95 17 99 16 C102 15 102 11 100 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M85 7 C83 3 85 0 88 1 C88 4 86 7 85 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M71 6 C69 9 67 13 71 12 C74 11 74 7 71 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- left secondary leaves -->
+      <path d="M152 27 C150 23 152 20 154 21 C155 24 153 27 152 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M139 21 C137 25 136 28 139 27 C142 26 142 22 139 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- right main leaves -->
+      <path d="M200 29 C203 24 201 20 198 22 C197 26 199 29 200 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M210 26 C213 30 215 34 211 33 C208 32 208 28 210 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M222 21 C225 16 223 12 220 14 C219 18 221 21 222 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M233 17 C236 21 238 25 234 24 C231 23 231 19 233 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M247 12 C250 7 248 3 245 5 C244 9 246 12 247 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M260 9 C263 13 265 17 261 16 C258 15 258 11 260 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M275 7 C277 3 275 0 272 1 C272 4 274 7 275 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M289 6 C291 9 293 13 289 12 C286 11 286 7 289 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- right secondary leaves -->
+      <path d="M208 27 C210 23 208 20 206 21 C205 24 207 27 208 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M221 21 C223 25 224 28 221 27 C218 26 218 22 221 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- left tip -->
+      <circle cx="47" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="47" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="35" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="25" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- right tip -->
+      <circle cx="313" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="313" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="325" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="335" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- secondary tips -->
+      <circle cx="128" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="128" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
+      <circle cx="232" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="232" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
     </svg>
   </div>
 
@@ -1211,38 +1251,37 @@ body{
   <!-- ── ORNAMENTO B ── -->
   <div class="ornament rv">
     <svg viewBox="0 0 260 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- medallón central -->
-      <circle cx="130" cy="16" r="9.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <circle cx="130" cy="16" r="7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
-      <ellipse cx="130" cy="8.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30"/>
-      <ellipse cx="135.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(60 135.5 11.8)"/>
-      <ellipse cx="135.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(120 135.5 20.2)"/>
-      <ellipse cx="130" cy="23.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30" transform="rotate(180 130 23.5)"/>
-      <ellipse cx="124.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-120 124.5 20.2)"/>
-      <ellipse cx="124.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-60 124.5 11.8)"/>
-      <circle cx="130" cy="16" r="3" fill="#6a6b4b" opacity=".52"/>
-      <!-- vides -->
-      <path d="M120 16 Q104 12 88 16 Q72 20 56 16 Q40 12 24 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <path d="M140 16 Q156 20 172 16 Q188 12 204 16 Q220 20 236 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <!-- hojas vide izq -->
-      <path d="M104 13 Q101 8 99 5 Q105 6 106 11 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M88 16 Q87 21 85 24 Q91 23 91 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M72 19 Q69 14 67 11 Q73 12 74 17 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M56 16 Q55 21 53 24 Q59 23 59 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M40 13 Q37 8 35 5 Q41 6 42 11 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- hojas vide der -->
-      <path d="M156 19 Q159 14 161 11 Q155 12 154 17 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M172 16 Q173 21 175 24 Q169 23 169 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M188 13 Q191 8 193 5 Q187 6 186 11 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M204 16 Q205 21 207 24 Q201 23 201 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M220 19 Q223 14 225 11 Q219 12 218 17 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- joyas extremos -->
-      <circle cx="24" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="24" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="236" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="236" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="13" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
-      <circle cx="247" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
+      <!-- fine rules -->
+      <line x1="10" y1="15.5" x2="113" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="147" y1="15.5" x2="250" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="10" y1="17.5" x2="113" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <line x1="147" y1="17.5" x2="250" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <!-- 4-petal blossom -->
+      <path d="M130 7 C127 9 127 13 130 14 C133 13 133 9 130 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M130 18 C127 19.5 127 23.5 130 25 C133 23.5 133 19.5 130 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M122 16 C122 13.5 118.5 12.5 117 14.5 C118.5 17 122 17 122 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M138 16 C138 13.5 141.5 12.5 143 14.5 C141.5 17 138 17 138 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <circle cx="130" cy="16" r="2.1" fill="#6a6b4b" opacity=".48"/>
+      <circle cx="130" cy="16" r="5.8" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".22"/>
+      <!-- diamond accents -->
+      <path d="M97 15.5 L100 18 L97 20.5 L94 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M163 15.5 L166 18 L163 20.5 L160 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M72 15.5 L75 18 L72 20.5 L69 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <path d="M188 15.5 L191 18 L188 20.5 L185 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <!-- leaf pairs (stroke only) -->
+      <path d="M84 14 C82 11 84 9 86 10 C86 13 85 14 84 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M84 18 C82 21 84 23 86 22 C86 19 85 18 84 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M57 14 C55 11 57 9 59 10 C59 13 58 14 57 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M57 18 C55 21 57 23 59 22 C59 19 58 18 57 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M176 14 C178 11 176 9 174 10 C174 13 175 14 176 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M176 18 C178 21 176 23 174 22 C174 19 175 18 176 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M203 14 C205 11 203 9 201 10 C201 13 202 14 203 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M203 18 C205 21 203 23 201 22 C201 19 202 18 203 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <!-- end ornaments -->
+      <circle cx="10" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="10" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
+      <circle cx="250" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="250" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
     </svg>
   </div>
 
@@ -1304,38 +1343,37 @@ body{
   <!-- ── ORNAMENTO B ── -->
   <div class="ornament rv">
     <svg viewBox="0 0 260 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- medallón central -->
-      <circle cx="130" cy="16" r="9.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <circle cx="130" cy="16" r="7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
-      <ellipse cx="130" cy="8.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30"/>
-      <ellipse cx="135.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(60 135.5 11.8)"/>
-      <ellipse cx="135.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(120 135.5 20.2)"/>
-      <ellipse cx="130" cy="23.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30" transform="rotate(180 130 23.5)"/>
-      <ellipse cx="124.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-120 124.5 20.2)"/>
-      <ellipse cx="124.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-60 124.5 11.8)"/>
-      <circle cx="130" cy="16" r="3" fill="#6a6b4b" opacity=".52"/>
-      <!-- vides -->
-      <path d="M120 16 Q104 12 88 16 Q72 20 56 16 Q40 12 24 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <path d="M140 16 Q156 20 172 16 Q188 12 204 16 Q220 20 236 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <!-- hojas vide izq -->
-      <path d="M104 13 Q101 8 99 5 Q105 6 106 11 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M88 16 Q87 21 85 24 Q91 23 91 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M72 19 Q69 14 67 11 Q73 12 74 17 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M56 16 Q55 21 53 24 Q59 23 59 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M40 13 Q37 8 35 5 Q41 6 42 11 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- hojas vide der -->
-      <path d="M156 19 Q159 14 161 11 Q155 12 154 17 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M172 16 Q173 21 175 24 Q169 23 169 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M188 13 Q191 8 193 5 Q187 6 186 11 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M204 16 Q205 21 207 24 Q201 23 201 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M220 19 Q223 14 225 11 Q219 12 218 17 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- joyas extremos -->
-      <circle cx="24" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="24" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="236" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="236" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="13" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
-      <circle cx="247" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
+      <!-- fine rules -->
+      <line x1="10" y1="15.5" x2="113" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="147" y1="15.5" x2="250" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="10" y1="17.5" x2="113" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <line x1="147" y1="17.5" x2="250" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <!-- 4-petal blossom -->
+      <path d="M130 7 C127 9 127 13 130 14 C133 13 133 9 130 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M130 18 C127 19.5 127 23.5 130 25 C133 23.5 133 19.5 130 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M122 16 C122 13.5 118.5 12.5 117 14.5 C118.5 17 122 17 122 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M138 16 C138 13.5 141.5 12.5 143 14.5 C141.5 17 138 17 138 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <circle cx="130" cy="16" r="2.1" fill="#6a6b4b" opacity=".48"/>
+      <circle cx="130" cy="16" r="5.8" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".22"/>
+      <!-- diamond accents -->
+      <path d="M97 15.5 L100 18 L97 20.5 L94 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M163 15.5 L166 18 L163 20.5 L160 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M72 15.5 L75 18 L72 20.5 L69 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <path d="M188 15.5 L191 18 L188 20.5 L185 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <!-- leaf pairs (stroke only) -->
+      <path d="M84 14 C82 11 84 9 86 10 C86 13 85 14 84 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M84 18 C82 21 84 23 86 22 C86 19 85 18 84 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M57 14 C55 11 57 9 59 10 C59 13 58 14 57 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M57 18 C55 21 57 23 59 22 C59 19 58 18 57 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M176 14 C178 11 176 9 174 10 C174 13 175 14 176 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M176 18 C178 21 176 23 174 22 C174 19 175 18 176 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M203 14 C205 11 203 9 201 10 C201 13 202 14 203 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M203 18 C205 21 203 23 201 22 C201 19 202 18 203 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <!-- end ornaments -->
+      <circle cx="10" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="10" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
+      <circle cx="250" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="250" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
     </svg>
   </div>
 
@@ -1400,57 +1438,62 @@ body{
   <!-- ── ORNAMENTO A ── -->
   <div class="ornament rv">
     <svg viewBox="0 0 360 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- roseta central -->
-      <circle cx="180" cy="40" r="8.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <ellipse cx="180" cy="32.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32"/>
-      <ellipse cx="186.1" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(60 186.1 36)"/>
-      <ellipse cx="186.1" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(120 186.1 44)"/>
-      <ellipse cx="180" cy="47.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32" transform="rotate(180 180 47.5)"/>
-      <ellipse cx="173.9" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-120 173.9 44)"/>
-      <ellipse cx="173.9" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-60 173.9 36)"/>
-      <circle cx="180" cy="40" r="2.5" fill="#6a6b4b" opacity=".55"/>
-      <!-- tallo y joya base -->
-      <line x1="180" y1="48" x2="180" y2="60" stroke="#6a6b4b" stroke-width="1.1" opacity=".5" stroke-linecap="round"/>
-      <circle cx="180" cy="60" r="3" fill="#6a6b4b" opacity=".5"/>
-      <circle cx="180" cy="60" r="5.5" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".26"/>
-      <circle cx="180" cy="60" r="8" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".14"/>
-      <!-- ramas principales -->
-      <path d="M180 40 C164 36 142 28 116 19 C92 12 74 8 56 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C196 36 218 28 244 19 C268 12 286 8 304 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C172 35 158 28 138 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C188 35 202 28 222 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <!-- hojas rama izq exterior -->
-      <path d="M152 33 Q148 27 146 23 Q152 23 155 28 Q154 32 152 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="152" y1="33" x2="149" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M127 23 Q123 17 121 13 Q127 13 130 18 Q129 22 127 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="127" y1="23" x2="124" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M100 14 Q97 9 95 6 Q100 6 103 10 Q102 13 100 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas rama der exterior -->
-      <path d="M208 33 Q212 27 214 23 Q208 23 205 28 Q206 32 208 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="208" y1="33" x2="211" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M233 23 Q237 17 239 13 Q233 13 230 18 Q231 22 233 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="233" y1="23" x2="236" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M260 14 Q263 9 265 6 Q260 6 257 10 Q258 13 260 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas ramas interiores -->
-      <path d="M160 34 Q157 29 155 26 Q161 25 162 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M143 25 Q140 20 138 17 Q144 17 145 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <path d="M200 34 Q203 29 205 26 Q199 25 198 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M217 25 Q220 20 222 17 Q216 17 215 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- flor punta izq -->
-      <circle cx="56" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="56" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="45" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="35" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- flor punta der -->
-      <circle cx="304" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="304" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="315" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="325" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- puntas ramas interiores -->
-      <circle cx="138" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="138" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="222" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="222" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
+      <!-- lozenge center -->
+      <path d="M180 23 L188 35 L180 47 L172 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".9" opacity=".52"/>
+      <path d="M180 27 L185 35 L180 43 L175 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".4" opacity=".24"/>
+      <circle cx="180" cy="35" r="1.9" fill="#6a6b4b" opacity=".50"/>
+      <!-- stem + jewel -->
+      <line x1="180" y1="47" x2="180" y2="57" stroke="#6a6b4b" stroke-width=".75" opacity=".38" stroke-linecap="round"/>
+      <circle cx="180" cy="59.5" r="2.4" fill="#6a6b4b" opacity=".44"/>
+      <circle cx="180" cy="59.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".6" opacity=".22"/>
+      <circle cx="180" cy="59.5" r="7.2" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".12"/>
+      <!-- left main branch -->
+      <path d="M172 35 C156 32 136 24 112 16 C90 9 69 6 47 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- left secondary branch -->
+      <path d="M172 35 C161 31 146 25 128 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- right main branch -->
+      <path d="M188 35 C204 32 224 24 248 16 C270 9 291 6 313 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- right secondary branch -->
+      <path d="M188 35 C199 31 214 25 232 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- left main leaves -->
+      <path d="M160 29 C157 24 159 20 162 22 C163 26 161 29 160 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M150 26 C147 30 145 34 149 33 C152 32 152 28 150 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M138 21 C135 16 137 12 140 14 C141 18 139 21 138 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M127 17 C124 21 122 25 126 24 C129 23 129 19 127 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M113 12 C110 7 112 3 115 5 C116 9 114 12 113 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M100 9 C97 13 95 17 99 16 C102 15 102 11 100 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M85 7 C83 3 85 0 88 1 C88 4 86 7 85 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M71 6 C69 9 67 13 71 12 C74 11 74 7 71 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- left secondary leaves -->
+      <path d="M152 27 C150 23 152 20 154 21 C155 24 153 27 152 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M139 21 C137 25 136 28 139 27 C142 26 142 22 139 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- right main leaves -->
+      <path d="M200 29 C203 24 201 20 198 22 C197 26 199 29 200 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M210 26 C213 30 215 34 211 33 C208 32 208 28 210 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M222 21 C225 16 223 12 220 14 C219 18 221 21 222 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M233 17 C236 21 238 25 234 24 C231 23 231 19 233 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M247 12 C250 7 248 3 245 5 C244 9 246 12 247 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M260 9 C263 13 265 17 261 16 C258 15 258 11 260 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M275 7 C277 3 275 0 272 1 C272 4 274 7 275 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M289 6 C291 9 293 13 289 12 C286 11 286 7 289 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- right secondary leaves -->
+      <path d="M208 27 C210 23 208 20 206 21 C205 24 207 27 208 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M221 21 C223 25 224 28 221 27 C218 26 218 22 221 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- left tip -->
+      <circle cx="47" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="47" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="35" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="25" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- right tip -->
+      <circle cx="313" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="313" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="325" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="335" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- secondary tips -->
+      <circle cx="128" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="128" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
+      <circle cx="232" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="232" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
     </svg>
   </div>
 
@@ -1465,18 +1508,22 @@ body{
       <div class="dc-col rv">
         <div class="dc-icon">
           <svg viewBox="0 0 48 82" width="48" height="82" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="24" cy="7.5" rx="4.5" ry="5.5" stroke="#6a6b4b" stroke-width="1.2"/>
-            <path d="M20.5 4 Q24 1.5 27.5 4" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <line x1="24" y1="13" x2="24" y2="18" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
-            <path d="M18 18 Q24 21 30 18" stroke="#6a6b4b" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-            <line x1="22" y1="18" x2="21" y2="31" stroke="#6a6b4b" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="26" y1="18" x2="27" y2="31" stroke="#6a6b4b" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M18 18 Q13 23 11 31" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <path d="M30 18 Q35 23 37 31" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <path d="M21 31 Q9 52 3.5 79" stroke="#6a6b4b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M27 31 Q39 52 44.5 79" stroke="#6a6b4b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M3.5 79 Q24 82.5 44.5 79" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
-            <path d="M21 31 Q24 29.5 27 31" stroke="#6a6b4b" stroke-width=".9" fill="none" stroke-linecap="round"/>
+            <circle cx="24" cy="7.5" r="4.6" stroke="#6a6b4b" stroke-width="1.1"/>
+            <path d="M19.5 5.5 Q22 2.5 24 2.5 Q26 2.5 28.5 5.5" stroke="#6a6b4b" stroke-width=".9" stroke-linecap="round" fill="none" opacity=".65"/>
+            <line x1="24" y1="12.1" x2="24" y2="16.5" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
+            <path d="M17.5 16.5 Q20.5 19.5 24 18 Q27.5 19.5 30.5 16.5" stroke="#6a6b4b" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+            <path d="M17.5 16.5 Q11.5 21 9.5 29" stroke="#6a6b4b" stroke-width=".95" stroke-linecap="round" fill="none"/>
+            <path d="M30.5 16.5 Q36.5 21 38.5 29" stroke="#6a6b4b" stroke-width=".95" stroke-linecap="round" fill="none"/>
+            <path d="M17.5 16.5 Q16.5 23 17.5 30.5" stroke="#6a6b4b" stroke-width="1.15" stroke-linecap="round" fill="none"/>
+            <path d="M30.5 16.5 Q31.5 23 30.5 30.5" stroke="#6a6b4b" stroke-width="1.15" stroke-linecap="round" fill="none"/>
+            <path d="M17.5 30.5 Q20.5 32.5 24 32 Q27.5 32.5 30.5 30.5" stroke="#6a6b4b" stroke-width=".9" fill="none" stroke-linecap="round"/>
+            <path d="M17.5 30.5 Q6 50 3 78.5" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M30.5 30.5 Q42 50 45 78.5" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M3 78.5 Q13.5 81.5 24 81.5 Q34.5 81.5 45 78.5" stroke="#6a6b4b" stroke-width="1.05" stroke-linecap="round" fill="none"/>
+            <path d="M20 32 Q14 53 10.5 77" stroke="#6a6b4b" stroke-width=".55" opacity=".38" stroke-linecap="round" fill="none"/>
+            <path d="M28 32 Q34 53 37.5 77" stroke="#6a6b4b" stroke-width=".55" opacity=".38" stroke-linecap="round" fill="none"/>
+            <path d="M24 32 Q24 57 24 79" stroke="#6a6b4b" stroke-width=".4" opacity=".25" stroke-linecap="round" fill="none"/>
+            <path d="M20 28 Q24 30 28 28" stroke="#6a6b4b" stroke-width=".7" opacity=".48" stroke-linecap="round" fill="none"/>
           </svg>
         </div>
         <div class="dc-col-ttl">Para Ellas</div>
@@ -1490,20 +1537,30 @@ body{
       <div class="dc-col rv">
         <div class="dc-icon">
           <svg viewBox="0 0 48 82" width="48" height="82" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="24" cy="7.5" rx="4.5" ry="5" stroke="#6a6b4b" stroke-width="1.2"/>
-            <line x1="24" y1="12.5" x2="24" y2="19" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
-            <path d="M14 19 Q24 17 34 19" stroke="#6a6b4b" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-            <line x1="14" y1="19" x2="9.5" y2="41" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
-            <line x1="34" y1="19" x2="38.5" y2="41" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
-            <line x1="20" y1="19" x2="19" y2="47" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
-            <line x1="28" y1="19" x2="29" y2="47" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
-            <path d="M20 19 L22.5 29 L24 24 L25.5 29 L28 19" stroke="#6a6b4b" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22.5 22 L24 24 L25.5 22 M22.5 22 L24 20.5 L25.5 22" stroke="#6a6b4b" stroke-width=".9" fill="none" stroke-linecap="round"/>
-            <circle cx="24" cy="22" r=".8" fill="#6a6b4b" opacity=".75"/>
-            <line x1="19" y1="47" x2="17" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
-            <line x1="29" y1="47" x2="31" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
-            <path d="M17 79 Q13.5 81 11 80" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
-            <path d="M31 79 Q34.5 81 37 80" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <circle cx="24" cy="7.5" r="4.6" stroke="#6a6b4b" stroke-width="1.1"/>
+            <line x1="24" y1="12.1" x2="24" y2="18" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round"/>
+            <path d="M20 18 L22.5 22.5 L24 20.5 L25.5 22.5 L28 18" stroke="#6a6b4b" stroke-width=".9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 18 Q15.5 21.5 14.5 26" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <path d="M28 18 Q32.5 21.5 33.5 26" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <path d="M14.5 26 Q10 23 8.5 33" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <path d="M33.5 26 Q38 23 39.5 33" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <path d="M14.5 26 Q13 37 14 48" stroke="#6a6b4b" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M33.5 26 Q35 37 34 48" stroke="#6a6b4b" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M22.5 22.5 L22 33 L24 37 L26 33 L25.5 22.5" stroke="#6a6b4b" stroke-width=".85" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 22.5 Q24 24.5 26 22.5 Q24 21 22 22.5 Z" fill="#6a6b4b" opacity=".55"/>
+            <line x1="24" y1="37" x2="24" y2="48" stroke="#6a6b4b" stroke-width=".75" stroke-linecap="round" opacity=".55"/>
+            <circle cx="24" cy="39.5" r=".85" fill="#6a6b4b" opacity=".55"/>
+            <circle cx="24" cy="43.5" r=".85" fill="#6a6b4b" opacity=".50"/>
+            <path d="M14.5 28.5 Q15.5 26.5 17 27.5" stroke="#6a6b4b" stroke-width=".7" stroke-linecap="round" fill="none" opacity=".50"/>
+            <path d="M14 48 Q24 50 34 48" stroke="#6a6b4b" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <line x1="15" y1="48" x2="14" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
+            <line x1="22" y1="48" x2="21" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M14 79 Q10.5 81 8.5 80.5" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <path d="M21 79 Q17.5 81.5 14 79 Q10.5 81 8.5 80.5" stroke="#6a6b4b" stroke-width=".75" stroke-linecap="round" fill="none"/>
+            <line x1="26" y1="48" x2="27" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
+            <line x1="33" y1="48" x2="34" y2="79" stroke="#6a6b4b" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M34 79 Q37.5 81 39.5 80.5" stroke="#6a6b4b" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <path d="M27 79 Q30.5 81.5 34 79 Q37.5 81 39.5 80.5" stroke="#6a6b4b" stroke-width=".75" stroke-linecap="round" fill="none"/>
           </svg>
         </div>
         <div class="dc-col-ttl">Para Ellos</div>
@@ -1555,6 +1612,13 @@ body{
         <div class="wheel-card"><img src="foto3.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
         <div class="wheel-card"><img src="foto4.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
         <div class="wheel-card"><img src="foto5.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto6.jpg" alt="Yessica &amp; Nelvi" loading="lazy"></div>
+        <div class="wheel-card wheel-card--video">
+          <video src="VideoBoda.mp4" muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+          <div class="vc-play-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
       </div>
     </div>
     <p class="gal-hint rv">Arrastra para girar</p>
@@ -1563,38 +1627,37 @@ body{
   <!-- ── ORNAMENTO B ── -->
   <div class="ornament rv">
     <svg viewBox="0 0 260 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- medallón central -->
-      <circle cx="130" cy="16" r="9.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <circle cx="130" cy="16" r="7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
-      <ellipse cx="130" cy="8.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30"/>
-      <ellipse cx="135.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(60 135.5 11.8)"/>
-      <ellipse cx="135.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(120 135.5 20.2)"/>
-      <ellipse cx="130" cy="23.5" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".30" transform="rotate(180 130 23.5)"/>
-      <ellipse cx="124.5" cy="20.2" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-120 124.5 20.2)"/>
-      <ellipse cx="124.5" cy="11.8" rx="1.7" ry="3.2" fill="#6a6b4b" opacity=".27" transform="rotate(-60 124.5 11.8)"/>
-      <circle cx="130" cy="16" r="3" fill="#6a6b4b" opacity=".52"/>
-      <!-- vides -->
-      <path d="M120 16 Q104 12 88 16 Q72 20 56 16 Q40 12 24 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <path d="M140 16 Q156 20 172 16 Q188 12 204 16 Q220 20 236 16" stroke="#6a6b4b" stroke-width="1.2" opacity=".44" fill="none" stroke-linecap="round"/>
-      <!-- hojas vide izq -->
-      <path d="M104 13 Q101 8 99 5 Q105 6 106 11 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M88 16 Q87 21 85 24 Q91 23 91 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M72 19 Q69 14 67 11 Q73 12 74 17 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M56 16 Q55 21 53 24 Q59 23 59 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M40 13 Q37 8 35 5 Q41 6 42 11 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- hojas vide der -->
-      <path d="M156 19 Q159 14 161 11 Q155 12 154 17 Z" fill="#6a6b4b" opacity=".36"/>
-      <path d="M172 16 Q173 21 175 24 Q169 23 169 18 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M188 13 Q191 8 193 5 Q187 6 186 11 Z" fill="#6a6b4b" opacity=".32"/>
-      <path d="M204 16 Q205 21 207 24 Q201 23 201 18 Z" fill="#6a6b4b" opacity=".28"/>
-      <path d="M220 19 Q223 14 225 11 Q219 12 218 17 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- joyas extremos -->
-      <circle cx="24" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="24" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="236" cy="16" r="2.8" fill="#6a6b4b" opacity=".42"/>
-      <circle cx="236" cy="16" r="5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="13" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
-      <circle cx="247" cy="15" r="1.5" fill="#6a6b4b" opacity=".28"/>
+      <!-- fine rules -->
+      <line x1="10" y1="15.5" x2="113" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="147" y1="15.5" x2="250" y2="15.5" stroke="#6a6b4b" stroke-width=".75" opacity=".40"/>
+      <line x1="10" y1="17.5" x2="113" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <line x1="147" y1="17.5" x2="250" y2="17.5" stroke="#6a6b4b" stroke-width=".3" opacity=".18"/>
+      <!-- 4-petal blossom -->
+      <path d="M130 7 C127 9 127 13 130 14 C133 13 133 9 130 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M130 18 C127 19.5 127 23.5 130 25 C133 23.5 133 19.5 130 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M122 16 C122 13.5 118.5 12.5 117 14.5 C118.5 17 122 17 122 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <path d="M138 16 C138 13.5 141.5 12.5 143 14.5 C141.5 17 138 17 138 16 Z" fill="none" stroke="#6a6b4b" stroke-width=".75" opacity=".52"/>
+      <circle cx="130" cy="16" r="2.1" fill="#6a6b4b" opacity=".48"/>
+      <circle cx="130" cy="16" r="5.8" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".22"/>
+      <!-- diamond accents -->
+      <path d="M97 15.5 L100 18 L97 20.5 L94 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M163 15.5 L166 18 L163 20.5 L160 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".30"/>
+      <path d="M72 15.5 L75 18 L72 20.5 L69 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <path d="M188 15.5 L191 18 L188 20.5 L185 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".45" opacity=".24"/>
+      <!-- leaf pairs (stroke only) -->
+      <path d="M84 14 C82 11 84 9 86 10 C86 13 85 14 84 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M84 18 C82 21 84 23 86 22 C86 19 85 18 84 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M57 14 C55 11 57 9 59 10 C59 13 58 14 57 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M57 18 C55 21 57 23 59 22 C59 19 58 18 57 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M176 14 C178 11 176 9 174 10 C174 13 175 14 176 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M176 18 C178 21 176 23 174 22 C174 19 175 18 176 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".26"/>
+      <path d="M203 14 C205 11 203 9 201 10 C201 13 202 14 203 14 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <path d="M203 18 C205 21 203 23 201 22 C201 19 202 18 203 18 Z" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".22"/>
+      <!-- end ornaments -->
+      <circle cx="10" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="10" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
+      <circle cx="250" cy="16.5" r="2.3" fill="#6a6b4b" opacity=".40"/>
+      <circle cx="250" cy="16.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".20"/>
     </svg>
   </div>
 
@@ -1620,57 +1683,62 @@ body{
   <!-- ── ORNAMENTO A ── -->
   <div class="ornament ornament--b2s rv">
     <svg viewBox="0 0 360 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- roseta central -->
-      <circle cx="180" cy="40" r="8.5" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".30"/>
-      <ellipse cx="180" cy="32.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32"/>
-      <ellipse cx="186.1" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(60 186.1 36)"/>
-      <ellipse cx="186.1" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(120 186.1 44)"/>
-      <ellipse cx="180" cy="47.5" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".32" transform="rotate(180 180 47.5)"/>
-      <ellipse cx="173.9" cy="44" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-120 173.9 44)"/>
-      <ellipse cx="173.9" cy="36" rx="1.8" ry="3.5" fill="#6a6b4b" opacity=".28" transform="rotate(-60 173.9 36)"/>
-      <circle cx="180" cy="40" r="2.5" fill="#6a6b4b" opacity=".55"/>
-      <!-- tallo y joya base -->
-      <line x1="180" y1="48" x2="180" y2="60" stroke="#6a6b4b" stroke-width="1.1" opacity=".5" stroke-linecap="round"/>
-      <circle cx="180" cy="60" r="3" fill="#6a6b4b" opacity=".5"/>
-      <circle cx="180" cy="60" r="5.5" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".26"/>
-      <circle cx="180" cy="60" r="8" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".14"/>
-      <!-- ramas principales -->
-      <path d="M180 40 C164 36 142 28 116 19 C92 12 74 8 56 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C196 36 218 28 244 19 C268 12 286 8 304 6" stroke="#6a6b4b" stroke-width="1.4" opacity=".5" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C172 35 158 28 138 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <path d="M180 40 C188 35 202 28 222 21" stroke="#6a6b4b" stroke-width=".9" opacity=".38" stroke-linecap="round" fill="none"/>
-      <!-- hojas rama izq exterior -->
-      <path d="M152 33 Q148 27 146 23 Q152 23 155 28 Q154 32 152 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="152" y1="33" x2="149" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M127 23 Q123 17 121 13 Q127 13 130 18 Q129 22 127 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="127" y1="23" x2="124" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M100 14 Q97 9 95 6 Q100 6 103 10 Q102 13 100 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas rama der exterior -->
-      <path d="M208 33 Q212 27 214 23 Q208 23 205 28 Q206 32 208 33 Z" fill="#6a6b4b" opacity=".38"/>
-      <line x1="208" y1="33" x2="211" y2="24" stroke="#6a6b4b" stroke-width=".5" opacity=".28"/>
-      <path d="M233 23 Q237 17 239 13 Q233 13 230 18 Q231 22 233 23 Z" fill="#6a6b4b" opacity=".34"/>
-      <line x1="233" y1="23" x2="236" y2="14" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
-      <path d="M260 14 Q263 9 265 6 Q260 6 257 10 Q258 13 260 14 Z" fill="#6a6b4b" opacity=".28"/>
-      <!-- hojas ramas interiores -->
-      <path d="M160 34 Q157 29 155 26 Q161 25 162 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M143 25 Q140 20 138 17 Q144 17 145 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <path d="M200 34 Q203 29 205 26 Q199 25 198 30 Z" fill="#6a6b4b" opacity=".30"/>
-      <path d="M217 25 Q220 20 222 17 Q216 17 215 22 Z" fill="#6a6b4b" opacity=".26"/>
-      <!-- flor punta izq -->
-      <circle cx="56" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="56" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="45" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="35" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- flor punta der -->
-      <circle cx="304" cy="6" r="3.5" fill="#6a6b4b" opacity=".44"/>
-      <circle cx="304" cy="6" r="6" fill="none" stroke="#6a6b4b" stroke-width=".8" opacity=".24"/>
-      <circle cx="315" cy="3" r="1.8" fill="#6a6b4b" opacity=".30"/>
-      <circle cx="325" cy="1" r="1.2" fill="#6a6b4b" opacity=".20"/>
-      <!-- puntas ramas interiores -->
-      <circle cx="138" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="138" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
-      <circle cx="222" cy="21" r="2.2" fill="#6a6b4b" opacity=".40"/>
-      <circle cx="222" cy="21" r="4" fill="none" stroke="#6a6b4b" stroke-width=".7" opacity=".22"/>
+      <!-- lozenge center -->
+      <path d="M180 23 L188 35 L180 47 L172 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".9" opacity=".52"/>
+      <path d="M180 27 L185 35 L180 43 L175 35 Z" fill="none" stroke="#6a6b4b" stroke-width=".4" opacity=".24"/>
+      <circle cx="180" cy="35" r="1.9" fill="#6a6b4b" opacity=".50"/>
+      <!-- stem + jewel -->
+      <line x1="180" y1="47" x2="180" y2="57" stroke="#6a6b4b" stroke-width=".75" opacity=".38" stroke-linecap="round"/>
+      <circle cx="180" cy="59.5" r="2.4" fill="#6a6b4b" opacity=".44"/>
+      <circle cx="180" cy="59.5" r="4.8" fill="none" stroke="#6a6b4b" stroke-width=".6" opacity=".22"/>
+      <circle cx="180" cy="59.5" r="7.2" fill="none" stroke="#6a6b4b" stroke-width=".35" opacity=".12"/>
+      <!-- left main branch -->
+      <path d="M172 35 C156 32 136 24 112 16 C90 9 69 6 47 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- left secondary branch -->
+      <path d="M172 35 C161 31 146 25 128 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- right main branch -->
+      <path d="M188 35 C204 32 224 24 248 16 C270 9 291 6 313 5" stroke="#6a6b4b" stroke-width=".85" opacity=".46" stroke-linecap="round" fill="none"/>
+      <!-- right secondary branch -->
+      <path d="M188 35 C199 31 214 25 232 18" stroke="#6a6b4b" stroke-width=".55" opacity=".32" stroke-linecap="round" fill="none"/>
+      <!-- left main leaves -->
+      <path d="M160 29 C157 24 159 20 162 22 C163 26 161 29 160 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M150 26 C147 30 145 34 149 33 C152 32 152 28 150 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M138 21 C135 16 137 12 140 14 C141 18 139 21 138 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M127 17 C124 21 122 25 126 24 C129 23 129 19 127 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M113 12 C110 7 112 3 115 5 C116 9 114 12 113 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M100 9 C97 13 95 17 99 16 C102 15 102 11 100 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M85 7 C83 3 85 0 88 1 C88 4 86 7 85 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M71 6 C69 9 67 13 71 12 C74 11 74 7 71 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- left secondary leaves -->
+      <path d="M152 27 C150 23 152 20 154 21 C155 24 153 27 152 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M139 21 C137 25 136 28 139 27 C142 26 142 22 139 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- right main leaves -->
+      <path d="M200 29 C203 24 201 20 198 22 C197 26 199 29 200 29 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".44"/>
+      <path d="M210 26 C213 30 215 34 211 33 C208 32 208 28 210 26 Z" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".42"/>
+      <path d="M222 21 C225 16 223 12 220 14 C219 18 221 21 222 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".38"/>
+      <path d="M233 17 C236 21 238 25 234 24 C231 23 231 19 233 17 Z" fill="none" stroke="#6a6b4b" stroke-width=".60" opacity=".36"/>
+      <path d="M247 12 C250 7 248 3 245 5 C244 9 246 12 247 12 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".30"/>
+      <path d="M260 9 C263 13 265 17 261 16 C258 15 258 11 260 9 Z" fill="none" stroke="#6a6b4b" stroke-width=".55" opacity=".26"/>
+      <path d="M275 7 C277 3 275 0 272 1 C272 4 274 7 275 7 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".22"/>
+      <path d="M289 6 C291 9 293 13 289 12 C286 11 286 7 289 6 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".18"/>
+      <!-- right secondary leaves -->
+      <path d="M208 27 C210 23 208 20 206 21 C205 24 207 27 208 27 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".30"/>
+      <path d="M221 21 C223 25 224 28 221 27 C218 26 218 22 221 21 Z" fill="none" stroke="#6a6b4b" stroke-width=".50" opacity=".26"/>
+      <!-- left tip -->
+      <circle cx="47" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="47" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="35" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="25" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- right tip -->
+      <circle cx="313" cy="5" r="3.2" fill="none" stroke="#6a6b4b" stroke-width=".65" opacity=".38"/>
+      <circle cx="313" cy="5" r="1.4" fill="#6a6b4b" opacity=".42"/>
+      <circle cx="325" cy="4" r="1.7" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".24"/>
+      <circle cx="335" cy="3" r="1.0" fill="#6a6b4b" opacity=".15"/>
+      <!-- secondary tips -->
+      <circle cx="128" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="128" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
+      <circle cx="232" cy="18" r="2" fill="#6a6b4b" opacity=".36"/>
+      <circle cx="232" cy="18" r="3.5" fill="none" stroke="#6a6b4b" stroke-width=".5" opacity=".20"/>
     </svg>
   </div>
 
@@ -1683,6 +1751,10 @@ body{
 
     <div class="rsvp-card rv">
       <div id="rsvpPasesBadge" class="rsvp-pases-badge" style="text-align:center;width:100%;display:block"></div>
+      <div class="rsvp-attend-row">
+        <button class="rsvp-attend-btn rsvp-attend-btn--yes" id="btnSiAsistire" onclick="selectAttend('yes')">Sí asistiré</button>
+        <button class="rsvp-attend-btn rsvp-attend-btn--no" id="btnNoAsistire" onclick="selectAttend('no')">No asistiré</button>
+      </div>
       <div id="rsvpNamesContainer"></div>
       <button class="btn-wa" id="btnConfirmar" onclick="sendRsvp()">
         Confirmar asistencia
@@ -2038,7 +2110,7 @@ function sendRsvp(){
 }
 
 function sendDecline(){
-  postRsvp('declino', []);
+  postRsvp('declino', [])
 }
 
 /* ─────────────── VINYL MUSIC BTN ─────────────── */
@@ -2138,7 +2210,7 @@ function initAll(){
     if (!ring || cards.length === 0) return;
 
     var n       = cards.length;
-    var radius  = 170;
+    var radius  = 210;
     var rot     = 0;
     var vel     = 0;
     var isDrag  = false;
@@ -2213,6 +2285,36 @@ function initAll(){
 
   if (typeof window._startAudio === 'function') window._startAudio();
 }
+
+/* ─────────────── VIDEO CARD ─────────────── */
+(function initVideoCard(){
+  const card = document.querySelector('.wheel-card--video');
+  if(!card) return;
+  const vid = card.querySelector('video');
+  if(!vid) return;
+
+  /* Show first frame as preview as soon as metadata is ready */
+  function seekPreview(){
+    try{ vid.currentTime = 0.1; }catch(e){}
+  }
+  if(vid.readyState >= 1){ seekPreview(); }
+  else{ vid.addEventListener('loadedmetadata', seekPreview, {once:true}); }
+
+  /* Toggle play/pause on tap — video continues playing while user scrolls */
+  card.addEventListener('click', function(){
+    if(vid.paused){
+      vid.play().catch(()=>{});
+      card.classList.add('playing');
+    } else {
+      vid.pause();
+      card.classList.remove('playing');
+    }
+  });
+
+  /* Re-show play button when video ends (loop is on, so this won't fire normally) */
+  vid.addEventListener('pause', function(){ card.classList.remove('playing'); });
+  vid.addEventListener('play',  function(){ card.classList.add('playing'); });
+})();
 
 /* ─────────────── ARRANCAR ─────────────── */
 initEnvelope();
