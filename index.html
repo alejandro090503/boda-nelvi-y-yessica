@@ -2025,6 +2025,10 @@ const RSVP_PASES  = (isNaN(RSVP_RAW) || RSVP_RAW < 1 || RSVP_RAW > 20) ? 1 : RSV
 const RSVP_URL    = 'https://boda-nelvi-y-yessica.vercel.app';
 let   RSVP_CHOICE = '';   /* 'yes' | 'no' | '' */
 
+/* Fecha límite: 18 jun 2026 23:59:59 — desde el 19 jun 00:00 el form se congela */
+const RSVP_DEADLINE = new Date(2026, 5, 18, 23, 59, 59, 999);
+const RSVP_FROZEN   = Date.now() > RSVP_DEADLINE.getTime();
+
 (function initRsvp(){
   const badge = document.getElementById('rsvpPasesBadge');
   badge.textContent = RSVP_PASES === 1
@@ -2062,22 +2066,60 @@ let   RSVP_CHOICE = '';   /* 'yes' | 'no' | '' */
     fetch(apiUrl)
       .then(function(r){ return r.json(); })
       .then(function(d){
-        if(!d || !d.ok || !d.invitado) return;
-        const inv = d.invitado;
-        if(inv.estado === 'confirmado'){
-          selectAttend('yes');
-          const inputs = document.querySelectorAll('.rsvp-name-input');
-          const nombres = Array.isArray(inv.nombres_confirmados) ? inv.nombres_confirmados : [];
-          nombres.forEach(function(n, idx){
-            if(inputs[idx]) inputs[idx].value = n;
-          });
-        } else if(inv.estado === 'declino'){
-          selectAttend('no');
+        if(d && d.ok && d.invitado){
+          const inv = d.invitado;
+          if(inv.estado === 'confirmado'){
+            selectAttend('yes');
+            const inputs = document.querySelectorAll('.rsvp-name-input');
+            const nombres = Array.isArray(inv.nombres_confirmados) ? inv.nombres_confirmados : [];
+            nombres.forEach(function(n, idx){
+              if(inputs[idx]) inputs[idx].value = n;
+            });
+          } else if(inv.estado === 'declino'){
+            selectAttend('no');
+          }
         }
+        applyDeadlineFreeze();
       })
-      .catch(function(){ /* sin conexión: dejar form vacío */ });
+      .catch(function(){ applyDeadlineFreeze(); });
+  } else {
+    applyDeadlineFreeze();
   }
 })();
+
+/* ─────────────── FECHA LÍMITE — CONGELAR FORM ─────────────── */
+function applyDeadlineFreeze(){
+  if(!RSVP_FROZEN) return;
+
+  const btnC   = document.getElementById('btnConfirmar');
+  const btnYes = document.getElementById('btnSiAsistire');
+  const btnNo  = document.getElementById('btnNoAsistire');
+  const card   = document.querySelector('.rsvp-card');
+  const cont   = document.getElementById('rsvpNamesContainer');
+
+  if(btnYes){ btnYes.disabled = true; btnYes.style.cursor='not-allowed'; btnYes.style.opacity='.55'; }
+  if(btnNo) { btnNo.disabled  = true; btnNo.style.cursor='not-allowed';  btnNo.style.opacity='.55'; }
+  document.querySelectorAll('.rsvp-name-input').forEach(function(i){
+    i.disabled = true;
+    i.style.background = '#f1ede7';
+    i.style.cursor = 'not-allowed';
+  });
+  if(btnC){
+    btnC.disabled = true;
+    btnC.textContent = 'Plazo cerrado';
+    btnC.style.cursor = 'not-allowed';
+    btnC.style.opacity = '.55';
+  }
+
+  /* Banner explicativo al inicio de la tarjeta */
+  if(card && !document.getElementById('rsvpDeadlineBanner')){
+    const banner = document.createElement('div');
+    banner.id = 'rsvpDeadlineBanner';
+    banner.style.cssText = 'margin-bottom:18px;padding:14px 16px;border-radius:10px;background:rgba(107,100,80,.10);border:1px solid rgba(107,100,80,.25);color:#5a4f3a;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:15px;line-height:1.5;text-align:center';
+    banner.innerHTML = '✦ El plazo para confirmar cerró el <strong style="font-style:normal">18 de junio de 2026</strong>.<br>Si necesitas ajustar tu respuesta, por favor contacta directamente a los novios.';
+    card.insertBefore(banner, card.firstChild);
+  }
+}
 
 /* ─────────────── TOGGLE SÍ / NO ASISTIRÉ ─────────────── */
 function selectAttend(choice){
@@ -2148,6 +2190,10 @@ function postRsvp(estado, nombresArr){
 }
 
 function sendRsvp(){
+  if(RSVP_FROZEN){
+    setFeedback('El plazo para confirmar ya cerró.', '#b91c1c');
+    return;
+  }
   if(!RSVP_CHOICE){
     setFeedback('Selecciona si asistirás o no.', '#b91c1c');
     return;
