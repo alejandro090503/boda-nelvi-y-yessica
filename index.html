@@ -2053,6 +2053,30 @@ let   RSVP_CHOICE = '';   /* 'yes' | 'no' | '' */
       inv.style.display = 'block';
     }
   }
+
+  /* Pre-llenar con la confirmación previa si existe */
+  if(RSVP_PARA){
+    const apiUrl = 'https://panel-invitados.vercel.app/api/confirmar'
+                 + '?nombre='   + encodeURIComponent(RSVP_PARA)
+                 + '&url_boda=' + encodeURIComponent(RSVP_URL);
+    fetch(apiUrl)
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(!d || !d.ok || !d.invitado) return;
+        const inv = d.invitado;
+        if(inv.estado === 'confirmado'){
+          selectAttend('yes');
+          const inputs = document.querySelectorAll('.rsvp-name-input');
+          const nombres = Array.isArray(inv.nombres_confirmados) ? inv.nombres_confirmados : [];
+          nombres.forEach(function(n, idx){
+            if(inputs[idx]) inputs[idx].value = n;
+          });
+        } else if(inv.estado === 'declino'){
+          selectAttend('no');
+        }
+      })
+      .catch(function(){ /* sin conexión: dejar form vacío */ });
+  }
 })();
 
 /* ─────────────── TOGGLE SÍ / NO ASISTIRÉ ─────────────── */
@@ -2082,9 +2106,7 @@ function setFeedback(msg, color){
 }
 
 function postRsvp(estado, nombresArr){
-  const btnC   = document.getElementById('btnConfirmar');
-  const btnYes = document.getElementById('btnSiAsistire');
-  const btnNo  = document.getElementById('btnNoAsistire');
+  const btnC = document.getElementById('btnConfirmar');
   btnC.disabled = true;
   btnC.textContent = 'Enviando…';
   setFeedback('', 'inherit');
@@ -2102,19 +2124,18 @@ function postRsvp(estado, nombresArr){
   })
   .then(function(r){ return r.json(); })
   .then(function(d){
+    btnC.disabled = false;
     if(d && d.ok){
+      /* Feedback temporal pero SIN congelar: usuario puede reconfirmar */
       btnC.textContent = estado === 'confirmado' ? '¡Confirmado! ✦' : 'Respuesta enviada ✦';
-      document.querySelectorAll('.rsvp-name-input').forEach(function(i){ i.disabled = true; });
-      if(btnYes) btnYes.disabled = true;
-      if(btnNo)  btnNo.disabled  = true;
       setFeedback(
         estado === 'confirmado'
-          ? '¡Gracias por confirmar! Los novios han sido notificados.'
-          : 'Gracias por avisarnos. Los novios han sido notificados.',
+          ? '¡Gracias por confirmar! Si cambias de opinión puedes actualizar tu respuesta cuando quieras.'
+          : 'Gracias por avisarnos. Si cambias de opinión puedes actualizar tu respuesta cuando quieras.',
         '#6b9b64'
       );
+      setTimeout(function(){ btnC.textContent = 'Actualizar respuesta'; }, 2400);
     } else {
-      btnC.disabled = false;
       btnC.textContent = 'Confirmar';
       setFeedback('Hubo un problema al enviar. Intenta de nuevo.', '#b91c1c');
     }
